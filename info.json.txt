@@ -1,0 +1,44 @@
+{
+    "user": "azure",
+    "hostname": "azureMaster",
+    "pythonVersion": "3.6",
+    "hadoopVersion": "3.2",
+    "masterIP" :"20.198.75.71",
+    "masterIP1" :["20.198.75.71"
+    ],
+    "slaveIP" :["13.71.81.25"
+    ],
+    "sparkVersion": "3.1",
+    "sparkCores": "2",
+    "sparkMemory": "8g",
+    "hive": "no",
+    "airflow": "no",
+    "postgres": "no",
+    "mysql": "no",
+    "mongodb": "no",
+    "mssql": "no"
+}
+
+
+{
+    "user": "azure",
+    "hostname": "azureMaster",
+    "pythonVersion": "3.6",
+    "hadoopVersion": "3.2",
+    "masterIP" :["20.219.37.27"
+    ],
+    "slaveIP" :["20.219.36.249"
+    ],
+    "sparkVersion": "3.1",
+    "sparkCores": "2",
+    "sparkMemory": "8g",
+    "hive": "no",
+    "airflow": "no",
+    "postgres": "no",
+    "mysql": "no",
+    "mongodb": "no",
+    "mssql": "no"
+}
+
+
+Shelby51035252
