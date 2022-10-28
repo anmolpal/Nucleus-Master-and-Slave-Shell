@@ -1018,7 +1018,8 @@ else
     sudo mkdir /usr/local/kockpit-tools/SSH
     echo "Installing openssh-server"
     sudo apt-get install openssh-server
-    ssh-keygen -t rsa # Replace with your command.
+    #ssh-keygen -t rsa # Replace with your command.
+    ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa <<< y
     sudo cat ~/.ssh/id_rsa.pub >>  ~/.ssh/authorized_keys
     chmod 700 ~/.ssh/
     read -t 2 -p "Transfering Keys to Slave Servers"
@@ -1267,8 +1268,8 @@ fi
 
 #############################################################################################################################
 echo " "
-read -p "Go to your Slave Server and run the script on your Slave Node. Press [Enter] to continue"
-read -p "If you have a Slave Node make sure to run the Slave Script Fully. Press [Enter] to continue with the installation"
+echo "Go to your Slave Server and run the script on your Slave Node. If you don't have a Slave Server, Press [Enter] to continue"
+read -p " "
 
 echo " "
 if [[ -d "/usr/local/kockpit-tools/Patch" ]]
@@ -1498,6 +1499,6 @@ sudo mv /etc/KockpitStudio/Packages/Installer/jupyter_notebook_config.py /home/$
 
 echo "NUCLEUS INSTALLATION COMPLETED"
 
-sudo supervisorctl reread
-sudo supervisorctl update
-sudo supervisorctl restart all
+#sudo supervisorctl reread
+#sudo supervisorctl update
+#sudo supervisorctl restart all
