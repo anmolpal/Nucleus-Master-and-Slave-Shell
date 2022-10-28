@@ -1011,7 +1011,8 @@ else
     sudo mkdir /usr/local/kockpit-tools/SSH
     echo "Installing openssh-server"
     sudo apt-get install openssh-server
-    ssh-keygen -t rsa # Replace with your command.
+    #ssh-keygen -t rsa # Replace with your command.
+    ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa <<< y
     sudo cat ~/.ssh/id_rsa.pub >>  ~/.ssh/authorized_keys
     chmod 700 ~/.ssh/
     read -t 2 -p "Transfering Keys to Slave Servers"
