@@ -2,11 +2,11 @@
     "user": "azure",
     "password": "Shelby51035252",
     "java": "8",
-    "hostname": "master",
+    "hostname": "NucleusTesting-Linux",
     "pythonVersion": "3.6",
     "hadoopVersion": "3.2",
-    "masterIP" :"4.224.253.25",
-    "masterIP1" :["4.224.253.25"
+    "masterIP" :"20.219.192.96",
+    "masterIP1" :["20.219.192.96"
     ],
     "slaveIP" :["20.25.51.184"
     ],

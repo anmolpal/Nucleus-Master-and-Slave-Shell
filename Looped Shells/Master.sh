@@ -1027,13 +1027,22 @@ else
     user=`jq '.user' info.json`
     sudo touch SSH.sh
     sudo chmod 777 SSH.sh
+    SSHPassword=`jq '.password' info.json`
+    cd /usr/local/etc/
+    sudo touch SSHPassword.txt
+    sudo chmod 777 SSHPassword.txt
+    echo $SSHPassword | sed "s/['\"]//g" > SSHPassword.txt
+    SSHPassword1=`awk 'FNR ==1 {print $1}' /usr/local/etc/SSHPassword.txt`
+    sudo apt-get install -y sshpass
+    cd /usr/local/
     jq -c '.slaveIP[]' info.json |
     while read i;
     do
-        echo "sudo ssh-copy-id -i /home/$user/.ssh/id_rsa.pub $user@$i" | sed "s/['\"]//g" >> SSH.sh
+        #echo "sudo ssh-copy-id -i /home/$user/.ssh/id_rsa.pub $user@$i" | sed "s/['\"]//g" >> SSH.sh
+        echo "sudo sshpass -p "$SSHPassword1" ssh-copy-id -o StrictHostKeyChecking=no -i /home/$user/.ssh/id_rsa.pub $user@$i" | sed "s/['\"]//g" >> SSH.sh
     done
     /bin/bash SSH.sh
-    sudo rm -rf SSH.sh
+    #sudo rm -rf SSH.sh
     sudo service ssh --full-restart
     service ssh status
 fi
