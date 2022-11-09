@@ -700,7 +700,11 @@ then
         echo $sparkMemory | sed "s/['\"]//g"
         echo "export SPARK_WORKER_MEMORY=$sparkMemory" | sed "s/['\"]//g" >> /usr/local/kockpit-tools/spark-3.1.3-bin-hadoop3.2/conf/spark-env.sh
         sudo echo "export JAVA_HOME=/usr/local/kockpit-tools/java-8-openjdk-amd64" >> /usr/local/kockpit-tools/spark-3.1.3-bin-hadoop3.2/conf/spark-env.sh
-        echo "export export SPARK_MASTER_HOST='$master'"
+        sudo touch hosts.txt
+        sudo chmod 777 hosts.txt
+        hostname > hosts.txt
+        master=`awk 'FNR ==1 {print $1}' /usr/local/hosts.txt`
+        echo "export SPARK_MASTER_HOST='$master'" >> /usr/local/kockpit-tools/spark-3.1.3-bin-hadoop3.2/conf/spark-env.sh
         cd /usr/local/
         masterIP=`jq '.masterIP' info.json`
         workerIP1=`jq '.workerIP1' info.json`
@@ -802,7 +806,11 @@ then
         echo $sparkMemory | sed "s/['\"]//g"
         echo "export SPARK_WORKER_MEMORY=$sparkMemory" | sed "s/['\"]//g" >> /usr/local/kockpit-tools/spark-3.2.2-bin-hadoop3.2/conf/spark-env.sh
         sudo echo "export JAVA_HOME=/usr/local/kockpit-tools/java-8-openjdk-amd64" >> /usr/local/kockpit-tools/spark-3.2.2-bin-hadoop3.2/conf/spark-env.sh
-        echo "export export SPARK_MASTER_HOST='$master'"
+        sudo touch hosts.txt
+        sudo chmod 777 hosts.txt
+        hostname > hosts.txt
+        master=`awk 'FNR ==1 {print $1}' /usr/local/hosts.txt`
+        echo "export SPARK_MASTER_HOST='$master'" >> /usr/local/kockpit-tools/spark-3.2.2-bin-hadoop3.2/conf/spark-env.sh
         cd /usr/local/
         masterIP=`jq '.masterIP' info.json`
         workerIP1=`jq '.workerIP1' info.json`
@@ -903,7 +911,11 @@ then
         echo $sparkMemory | sed "s/['\"]//g"
         echo "export SPARK_WORKER_MEMORY=$sparkMemory" | sed "s/['\"]//g" >> /usr/local/kockpit-tools/spark-3.0.3-bin-hadoop3.2/conf/spark-env.sh
         sudo echo "export JAVA_HOME=/usr/local/kockpit-tools/java-8-openjdk-amd64" >> /usr/local/kockpit-tools/spark-3.0.3-bin-hadoop3.2/conf/spark-env.sh
-        echo "export export SPARK_MASTER_HOST='$master'"
+        sudo touch hosts.txt
+        sudo chmod 777 hosts.txt
+        hostname > hosts.txt
+        master=`awk 'FNR ==1 {print $1}' /usr/local/hosts.txt`
+        echo "export SPARK_MASTER_HOST='$master'" >> /usr/local/kockpit-tools/spark-3.0.3-bin-hadoop3.2/conf/spark-env.sh
         cd /usr/local/
         masterIP=`jq '.masterIP' info.json`
         workerIP1=`jq '.workerIP1' info.json`
