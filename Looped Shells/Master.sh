@@ -704,7 +704,7 @@ then
         sudo chmod 777 hosts.txt
         hostname > hosts.txt
         master=`awk 'FNR ==1 {print $1}' /usr/local/hosts.txt`
-        echo "export SPARK_MASTER_HOST='$master'" >> /usr/local/kockpit-tools/spark-3.1.3-bin-hadoop3.2/conf/spark-env.sh
+        echo export SPARK_MASTER_HOST='"'$master'"' >> /usr/local/kockpit-tools/spark-3.1.3-bin-hadoop3.2/conf/spark-env.sh
         cd /usr/local/
         masterIP=`jq '.masterIP' info.json`
         workerIP1=`jq '.workerIP1' info.json`
@@ -810,7 +810,7 @@ then
         sudo chmod 777 hosts.txt
         hostname > hosts.txt
         master=`awk 'FNR ==1 {print $1}' /usr/local/hosts.txt`
-        echo "export SPARK_MASTER_HOST='$master'" >> /usr/local/kockpit-tools/spark-3.2.2-bin-hadoop3.2/conf/spark-env.sh
+        echo export SPARK_MASTER_HOST='"'$master'"' >> /usr/local/kockpit-tools/spark-3.2.2-bin-hadoop3.2/conf/spark-env.sh
         cd /usr/local/
         masterIP=`jq '.masterIP' info.json`
         workerIP1=`jq '.workerIP1' info.json`
@@ -915,7 +915,7 @@ then
         sudo chmod 777 hosts.txt
         hostname > hosts.txt
         master=`awk 'FNR ==1 {print $1}' /usr/local/hosts.txt`
-        echo "export SPARK_MASTER_HOST='$master'" >> /usr/local/kockpit-tools/spark-3.0.3-bin-hadoop3.2/conf/spark-env.sh
+        echo export SPARK_MASTER_HOST='"'$master'"' >> /usr/local/kockpit-tools/spark-3.0.3-bin-hadoop3.2/conf/spark-env.sh
         cd /usr/local/
         masterIP=`jq '.masterIP' info.json`
         workerIP1=`jq '.workerIP1' info.json`
