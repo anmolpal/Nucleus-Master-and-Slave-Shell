@@ -295,8 +295,6 @@ then
         read -t 2 -p "Setting up the configuration files in /etc/hadoop"
         echo " "
     
-        sudo touch core-site.xml
-        sudo chmod 777 /usr/local/kockpit-tools/hadoop-3.2.3/etc/hadoop/core-site.xml
         cd /usr/local
         hn=`jq '.hostname' info.json`
         sudo touch computerName.txt
@@ -304,6 +302,9 @@ then
         echo $hn | sed "s/['\"]//g" > computerName.txt
         #echo $hostname | sed "s/['\"]//g" >> hosts.txt
         CN=`awk 'FNR ==1 {print $1}' /usr/local/computerName.txt`
+        cd /usr/local/kockpit-tools/hadoop-3.2.3/etc/hadoop/
+        sudo touch core-site.xml
+        sudo chmod 777 /usr/local/kockpit-tools/hadoop-3.2.3/etc/hadoop/core-site.xml
         sudo echo "  <configuration>
                             <property>
                                       <name>fs.defaultFS</name>
@@ -472,9 +473,7 @@ then
         echo "==================================================="
         read -t 5 -p "Setting up the configuration files in /etc/hadoop"
         echo " "
-    
-        sudo touch core-site.xml
-        sudo chmod 777 /usr/local/kockpit-tools/hadoop-3.3.2/etc/hadoop/core-site.xml
+        
         cd /usr/local
         hn=`jq '.hostname' info.json`
         sudo touch computerName.txt
@@ -482,6 +481,9 @@ then
         echo $hn | sed "s/['\"]//g" > computerName.txt
         #echo $hostname | sed "s/['\"]//g" >> hosts.txt
         CN=`awk 'FNR ==1 {print $1}' /usr/local/computerName.txt`
+        cd /usr/local/kockpit-tools/hadoop-3.3.2/etc/hadoop/
+        sudo touch core-site.xml
+        sudo chmod 777 /usr/local/kockpit-tools/hadoop-3.3.2/etc/hadoop/core-site.xml
         sudo echo "  <configuration>
                             <property>
                                       <name>fs.defaultFS</name>

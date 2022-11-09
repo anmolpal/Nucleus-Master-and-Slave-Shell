@@ -336,7 +336,7 @@ then
                                 </property>
                                 <property>
                                          <name>mapred.job.tracker</name>
-                                         <value>localhost:54311</value>
+                                         <value>$master:54311</value>
                                 </property>
                 </configuration>" >> mapred-site.xml        
         
@@ -515,7 +515,7 @@ then
                                 </property>
                                 <property>
                                          <name>mapred.job.tracker</name>
-                                         <value>localhost:54311</value>
+                                         <value>$master:54311</value>
                                 </property>
                 </configuration>" >> mapred-site.xml        
         
