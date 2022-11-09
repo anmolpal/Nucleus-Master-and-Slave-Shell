@@ -700,6 +700,7 @@ then
         echo $sparkMemory | sed "s/['\"]//g"
         echo "export SPARK_WORKER_MEMORY=$sparkMemory" | sed "s/['\"]//g" >> /usr/local/kockpit-tools/spark-3.1.3-bin-hadoop3.2/conf/spark-env.sh
         sudo echo "export JAVA_HOME=/usr/local/kockpit-tools/java-8-openjdk-amd64" >> /usr/local/kockpit-tools/spark-3.1.3-bin-hadoop3.2/conf/spark-env.sh
+        echo "export export SPARK_MASTER_HOST='$master'"
         cd /usr/local/
         masterIP=`jq '.masterIP' info.json`
         workerIP1=`jq '.workerIP1' info.json`
@@ -801,6 +802,7 @@ then
         echo $sparkMemory | sed "s/['\"]//g"
         echo "export SPARK_WORKER_MEMORY=$sparkMemory" | sed "s/['\"]//g" >> /usr/local/kockpit-tools/spark-3.2.2-bin-hadoop3.2/conf/spark-env.sh
         sudo echo "export JAVA_HOME=/usr/local/kockpit-tools/java-8-openjdk-amd64" >> /usr/local/kockpit-tools/spark-3.2.2-bin-hadoop3.2/conf/spark-env.sh
+        echo "export export SPARK_MASTER_HOST='$master'"
         cd /usr/local/
         masterIP=`jq '.masterIP' info.json`
         workerIP1=`jq '.workerIP1' info.json`
@@ -901,6 +903,7 @@ then
         echo $sparkMemory | sed "s/['\"]//g"
         echo "export SPARK_WORKER_MEMORY=$sparkMemory" | sed "s/['\"]//g" >> /usr/local/kockpit-tools/spark-3.0.3-bin-hadoop3.2/conf/spark-env.sh
         sudo echo "export JAVA_HOME=/usr/local/kockpit-tools/java-8-openjdk-amd64" >> /usr/local/kockpit-tools/spark-3.0.3-bin-hadoop3.2/conf/spark-env.sh
+        echo "export export SPARK_MASTER_HOST='$master'"
         cd /usr/local/
         masterIP=`jq '.masterIP' info.json`
         workerIP1=`jq '.workerIP1' info.json`
@@ -1042,7 +1045,7 @@ else
         echo "sudo sshpass -p "$SSHPassword1" ssh-copy-id -o StrictHostKeyChecking=no -i /home/$user/.ssh/id_rsa.pub $user@$i" | sed "s/['\"]//g" >> SSH.sh
     done
     /bin/bash SSH.sh
-    #sudo rm -rf SSH.sh
+    sudo rm -rf SSH.sh
     sudo service ssh --full-restart
     service ssh status
 fi
@@ -1117,6 +1120,14 @@ then
         sudo mkdir Postgres
         yes | sudo apt install postgresql-10
         yes | sudo apt install postgresql postgresql-contrib
+        sudo ufw allow 22/tcp
+        sudo ufw allow 5432/tcp
+        sudo wget https://github.com/anmolpal/Nucleus-Master-and-Slave-Shell/archive/refs/heads/main.zip
+        sudo apt install unzip
+        sudo unzip main.zip
+        cd /usr/local/kockpit-tools/Nucleus-Master-and-Slave-Shell-main
+        sudo mv pg_hba.conf postgresql.conf /etc/postgresql/10/main/
+        sudo service postgresql restart   
     fi
 else
     echo "Postgresql Installation Skipped"
