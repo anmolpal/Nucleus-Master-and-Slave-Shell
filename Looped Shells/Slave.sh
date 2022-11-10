@@ -1269,10 +1269,12 @@ then
         sudo apt-get update
         sudo apt-get upgrade
         sudo apt install mssql-server -y
-        sudo /opt/mssql/bin/mssql-conf setup
+        #sudo /opt/mssql/bin/mssql-conf setup
         #systemctl status mssql-server
+        sudo MSSQL_SA_PASSWORD=sa@123 \ MSSQL_PID=developer  /opt/mssql/bin/mssql-conf -n setup accept-eula
         sudo apt-get update
-        sudo apt install mssql-tools -y
+        sudo ACCEPT_EULA=y DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends mssql-tools unixodbc-dev
+        #sudo apt install mssql-tools -y
         #eval "$(cat ~/.bashrc | tail -n +10)"
         sudo ufw allow 1433
         sudo ufw allow 1434
