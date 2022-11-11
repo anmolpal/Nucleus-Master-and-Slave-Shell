@@ -1197,7 +1197,7 @@ then
             yes | sudo apt-get install mysql-server
             echo " "
             mysql --version
-            sudo mysql_secure_installation
+            #sudo mysql_secure_installation
             sudo systemctl restart mysql
             sudo systemctl enable mysql
             sudo systemctl start mysql
@@ -1531,6 +1531,59 @@ sudo chmod 777 /home/$customuser/.jupyter
 sudo mv /etc/KockpitStudio/Packages/Installer/jupyter_notebook_config.py /home/$customuser/.jupyter/
 ################################################################ Notebook Configuration #####################################
 
+MYSQL_PASS="root@1234"
+
+# Install "expect"
+sudo apt-get -qq install expect > /dev/null
+
+# Generate an expect script
+tee ~/secure_mysql.sh > /dev/null << EOF
+
+  spawn $(which mysql_secure_installation)
+
+  expect "Press y|Y for Yes, any other key for No:"
+  send "n\r"
+
+  # Enter the password for user root
+  expect "Enter the password for user root:"
+  send $MYSQL_PASS
+  send "\r"
+
+  expect "Re-enter new password:"
+  send $MYSQL_PASS
+  send "\r"
+
+  # Would you like to setup the validate Password Plugin?
+  expect "Press y|Y for Yes, any other key for No:"
+  send "y\r"
+
+  # Change the password for root?
+  expect "Change the password for root ? ((Press y|Y for Yes, any other key for No) :"
+  send "n\r"
+
+  # Remove anonymous users
+  expect "Remove anonymous users? (Press y|Y for Yes, any other key for No) :"
+  send "n\r"
+
+  # Disallow remote root login
+  expect "Disallow root login remotely? (Press y|Y for Yes, any other key for No) :"
+  send "n\r"
+
+  # Remove test DB?
+  expect "Remove test database and access to it? (Press y|Y for Yes, any other key for No) :"
+  send "n\r"
+
+  # Reload privilege tables
+  expect "Reload privilege tables now? (Press y|Y for Yes, any other key for No) :"
+  send "y\r"
+
+  expect eof
+EOF
+
+# Run Expect script.
+# This runs the "mysql_secure_installation" script which removes insecure defaults.
+sudo expect ~/secure_mysql.sh
+# sudo rm -rf ~/secure_mysql.sh
 echo "NUCLEUS INSTALLATION COMPLETED"
 
 #sudo supervisorctl reread
