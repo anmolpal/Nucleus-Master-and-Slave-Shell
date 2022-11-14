@@ -1,5 +1,18 @@
 #!/bin/sh
 sudo dpkg --configure -a
+sudo timedatectl set-timezone Asia/Kolkata
+cd /usr/local/
+sudo mkdir logs
+sudo chmod 777 logs
+cd /usr/local/logs/
+sudo touch log_file.txt
+sudo chmod 777 log_file.txt
+log=log_file.txt
+printf "Log File - " >> $log
+
+# append date to log file
+date >> $log
+(
 yes | sudo apt-get update
 yes | sudo apt-get upgrade
 
@@ -54,6 +67,13 @@ else
     echo "JAVA does not exist. Installing JAVA"
     yes | sudo apt install openjdk-8-jdk-headless
     sudo cp -r /usr/lib/jvm/java-8-openjdk-amd64 /usr/local/kockpit-tools/
+    sudo pip3 install simplejson
+    sudo wget https://github.com/anmolpal/JAVA/archive/refs/heads/main.zip
+    sudo apt-get install unzip
+    sudo unzip main.zip
+    cd /usr/local/JAVA-main/
+    sudo mv redgear.py /usr/local/src/
+    python3 /usr/local/src/redgear.py
 fi
 
 read -t 2 -p "Java Version is: "
@@ -61,6 +81,8 @@ java -version
 read -t 2 -p "   "
 
 ################################################################ Installing Python #####################################
+cd /usr/local/
+sudo rm -rf main.zip JAVA-main
 echo " "
 echo "==================================================="
 echo "==================================================="
@@ -1452,3 +1474,4 @@ echo "NUCLEUS INSTALLATION COMPLETED"
 #sudo supervisorctl reread
 #sudo supervisorctl update
 #sudo supervisorctl restart all
+) 2>&1 | tee -a $log
