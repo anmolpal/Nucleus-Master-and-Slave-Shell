@@ -1293,7 +1293,7 @@ then
         sudo apt install mssql-server -y
         #sudo /opt/mssql/bin/mssql-conf setup
         #systemctl status mssql-server
-        sudo MSSQL_SA_PASSWORD=sa@123 \ MSSQL_PID=developer  /opt/mssql/bin/mssql-conf -n setup accept-eula
+        sudo MSSQL_SA_PASSWORD=sa@12345 \ MSSQL_PID=developer  /opt/mssql/bin/mssql-conf -n setup accept-eula
         sudo apt-get update
         sudo ACCEPT_EULA=y DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends mssql-tools unixodbc-dev
         #sudo apt install mssql-tools -y
